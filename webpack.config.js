@@ -17,7 +17,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   module: {
     rules: [{
@@ -25,9 +26,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            // presets: ['@babel/preset-env']
           }
-        }
+        },
+        include: [path.join(__dirname, './src'), path.join(__dirname, './node_modules/webpack-dev-server/client')]
       },
       {
         test: /\.css$/,
