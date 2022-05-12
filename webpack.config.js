@@ -14,7 +14,7 @@ const {
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/main.js',
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
@@ -29,21 +29,28 @@ module.exports = {
             // presets: ['@babel/preset-env']
           }
         },
-        include: [path.join(__dirname, './src'), path.join(__dirname, './node_modules/webpack-dev-server/client')]
+        // include: [path.join(__dirname, './src'), path.join(__dirname, './node_modules/webpack-dev-server/client')],
+        // exclude:'/node_modules/'
       },
       {
         test: /\.css$/,
         use: [
-          // MiniCssExtractPlugin.loader,
-          'style-loader',
+          MiniCssExtractPlugin.loader,
+          // {
+          //   loader: MiniCssExtractPlugin.loader,
+          //   options: {
+          //     publicPath: './'
+          //   }
+          // },
+          // 'style-loader',
           'css-loader'
         ]
       },
       {
         test: /\.less$/,
         use: [
-          // MiniCssExtractPlugin.loader,
-          'style-loader',
+          MiniCssExtractPlugin.loader,
+          // 'style-loader',
           'css-loader',
           'less-loader'
         ]
@@ -126,9 +133,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new OptimizeCssAssetsWebpackPlugin(),
-    // new MiniCssExtractPlugin({
-    //   filename: 'css/[name].css'
-    // }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
     new VueLoaderPlugin()
   ],
   devServer: {
