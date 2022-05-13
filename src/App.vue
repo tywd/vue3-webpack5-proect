@@ -9,15 +9,17 @@
   </div>
 </template>
 <script>
-import { defineComponent, computed } from "vue";
+import { ref, defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
-    name: 'App',
+  name: "App",
   setup() {
     const store = useStore();
     const count = computed(() => store.state.count);
+    const name = ref("tywd");
 
     return {
+      name,
       count
     };
   }
