@@ -1,0 +1,10 @@
+@import "_normalize"; // api: https://github.com/necolas/normalize.css/
+@import "_variables"; // 站点变量
+@import "_base";
+.toast-tip {
+  width: 2rem;
+  height: 2rem;
+  line-height: .4rem;
+  font-size: 0.3rem;
+  padding-bottom: 0.1rem;
+}

@@ -1,4 +1,5 @@
 // webpack.config.js
+const webpack = require('webpack');
 const path = require('path');
 const {
   CleanWebpackPlugin
@@ -11,6 +12,7 @@ const {
   VueLoaderPlugin
 } = require('vue-loader/dist/index');
 
+const resolveSrc = (src) => path.resolve(__dirname, src)
 
 module.exports = {
   mode: 'development',
@@ -19,6 +21,15 @@ module.exports = {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      // 'vue$': 'vue/dist/vue.esm.js',
+      '@': resolveSrc('src'),
+      'utils': resolveSrc('src/utils'),
+      'assets': resolveSrc('src/assets'),
+    }
   },
   module: {
     rules: [{
@@ -53,6 +64,14 @@ module.exports = {
           // 'style-loader',
           'css-loader',
           'less-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          "sass-loader", // Compiles Sass to CSS
         ]
       },
       {
@@ -107,12 +126,6 @@ module.exports = {
           }
         }
       },
-      // {
-      //   test: /\.ts$/,
-      //   use: [
-      //     'ts-loader'
-      //   ]
-      // },
       {
         test: /\.vue$/,
         use: [
@@ -136,12 +149,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    // 使用vue3 时推荐开启 具体可查看 https://link.vuejs.org/feature-flags.
+    new webpack.DefinePlugin({
+      '__VUE_OPTIONS_API__': true, //（启用/禁用选项 API 支持，默认值true：）
+      '__VUE_PROD_DEVTOOLS__': false //（在生产中启用/禁用 devtools 支持，默认值false：）
+    })
   ],
   devServer: {
     port: 8080,
     hot: true,
-    open: true,
+    open: false, // 是否自动打开
     // contentBase: './dist'
   },
   optimization: {
