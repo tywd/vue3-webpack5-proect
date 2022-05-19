@@ -2,8 +2,14 @@
  * @Author: tywd
  * @Date: 2022-05-18 17:37:38
  * @LastEditors: tywd
- * @LastEditTime: 2022-05-19 22:12:16
+ * @LastEditTime: 2022-05-19 22:20:37
  * @FilePath: /webpack5-vue3/src/utils/redPacketRainAnimate.js
+ * 参考连接
+ * https://pixijs.huashengweilai.com/guide/start/1.introduction.html 中文网
+ * https://pixijs.io/guides/basics/textures.html 英文版
+ * https://greensock.com/docs/v3/GSAP gsap 动画库
+ * https://mp.weixin.qq.com/s?__biz=MzUxNjQ1NjMwNw==&mid=2247485425&idx=1&sn=f12f24cf96e67276cb0fba7a28d43c0f&scene=21#wechat_redirect
+ * https://www.likecs.com/show-204473011.html
  * @Description: 红包雨动画类封装
  */
 import * as PIXI from 'pixi.js'
