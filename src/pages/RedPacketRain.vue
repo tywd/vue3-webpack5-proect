@@ -2,13 +2,14 @@
  * @Author: tywd
  * @Date: 2022-05-18 15:16:41
  * @LastEditors: tywd
- * @LastEditTime: 2022-05-19 22:15:52
+ * @LastEditTime: 2022-05-29 14:50:48
  * @FilePath: /webpack5-vue3/src/pages/RedPacketRain.vue
  * @Description: 实现一个简易红包雨
 -->
 <template>
   <div class="red-packet-container">
-    <header>红包雨</header>
+    <MyHead title="红包雨"/>
+    <!-- <header>红包雨</header> -->
     <!-- <div
       class="fromTo f30"
       @click="fromToClick"
@@ -26,7 +27,7 @@
       ref="redpacketElm"
       class="redpacket-elm"
     >
-      <v-button @click="openRedPacketRain">开始红包雨</v-button>
+      <van-button @click="openRedPacketRain">开始红包雨</van-button>
     </div>
     <img
       :src="redbag"
@@ -40,13 +41,16 @@
 import { reactive, defineComponent, ref, toRefs, onMounted } from "vue";
 import RedPacketRainApp from "utils/redPacketRainAnimate.js";
 import redbag from "assets/img/redbag@3x.png";
-import { Button } from "vant";
+import { Button as vanButton } from "vant";
+import MyHead from "components/MyHead.vue";
 export default defineComponent({
   name: "RedPacketRain",
   components: {
-    "v-button": Button
+    vanButton,
+    MyHead
   },
   setup(props, context) {
+    console.log('context: ', context);
     const redpacketElm = ref(null);
     const state = reactive({
       gameCfgDefault: {
@@ -118,9 +122,9 @@ export default defineComponent({
     font-size: 25px;
   }
   .redpacket-elm {
-    position: fixed;
-    left: 0;
-    top: 0;
+    // position: fixed;
+    // left: 0;
+    // top: 0;
     // width: 100%;
     // height: 80%;
     // border: 1px solid #000;

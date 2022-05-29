@@ -1,9 +1,14 @@
+<!--
+ * @Author: tywd
+ * @Date: 2022-05-18 15:04:01
+ * @LastEditors: tywd
+ * @LastEditTime: 2022-05-29 14:32:24
+ * @FilePath: /webpack5-vue3/src/App.vue
+ * @Description: Do not edit
+-->
 <template>
-  <div>
-    <router-link to="/">首页</router-link> <br>
-    <router-link to="/me">我的</router-link> <br>
-    <router-link to="/redPacketRain">红包雨</router-link>
-    <router-view></router-view>
+  <div class="app-container">
+    <router-view />
   </div>
 </template>
 <script>
