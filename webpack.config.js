@@ -1,6 +1,7 @@
 // webpack.config.js
 const webpack = require('webpack');
 const path = require('path');
+const isDev = process.env.NODE_ENV === 'development';
 const {
   CleanWebpackPlugin
 } = require('clean-webpack-plugin');
@@ -8,6 +9,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const ImageminPlugin = require('imagemin-webpack-plugin').default // 使用cnpm 安装，npm有些依赖下不来会报错
+
 const {
   VueLoaderPlugin
 } = require('vue-loader/dist/index');
@@ -16,6 +20,7 @@ const resolveSrc = (src) => path.resolve(__dirname, src)
 
 module.exports = {
   mode: 'development',
+  devtool: 'eval-cheap-module-source-map',
   entry: './src/main.js',
   output: {
     filename: '[name].js',
@@ -90,7 +95,7 @@ module.exports = {
               }
             }
           },
-          {
+          /* {
             loader: 'image-webpack-loader',
             options: {
               mozjpeg: {
@@ -110,7 +115,7 @@ module.exports = {
                 quality: 75
               }
             }
-          }
+          } */
         ]
       },
       {
@@ -140,7 +145,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
-      title: 'Vue3 + TS -> Web App',
+      title: 'Vue3 -> Web App',
       minify: {
         collapseWhitespace: true, // 去掉空格
         removeComments: true // 去掉注释
@@ -156,7 +161,14 @@ module.exports = {
     new webpack.DefinePlugin({
       '__VUE_OPTIONS_API__': true, //（启用/禁用选项 API 支持，默认值true：）
       '__VUE_PROD_DEVTOOLS__': false //（在生产中启用/禁用 devtools 支持，默认值false：）
-    })
+    }),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i
+    }),
+    /* new BundleAnalyzerPlugin({
+      analyzerPort: 9091,
+      generateStatsFile: false
+    }), */
   ],
   devServer: {
     port: 8080,
