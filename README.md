@@ -38,16 +38,19 @@
     // --START 压缩 js 文件
     "terser-webpack-plugin": "^5.3.1",
 
-    // --START 压缩图片
+    // --START 压缩图片 一个 plugin 一个 loader
     "image-webpack-loader": "^8.1.0",
+    "imagemin-webpack-plugin": "^2.4.2",
 
     // --START 集成Typescript
     "ts-loader": "^9.3.0",
     "typescript": "^4.6.4",
 
-    // 识别 .vue文件
     // --START 配置环境变量
-    
+    "cross-env": "^7.0.3",
+
+    // --START webpack 打包分析
+    "webpack-bundle-analyzer": "^4.5.0",
 }
 
 "dependencies": {
