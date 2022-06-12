@@ -41,14 +41,19 @@ module.exports = {
   module: {
     rules: [{
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            // presets: ['@babel/preset-env']
+        include: resolveSrc('src'),
+        use: [
+          'cache-loader',
+          'thread-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              // presets: ['@babel/preset-env']
+            }
           }
-        },
+        ],
         // include: [path.join(__dirname, './src'), path.join(__dirname, './node_modules/webpack-dev-server/client')],
-        // exclude:'/node_modules/'
+        // exclude: '/node_modules/'
       },
       {
         test: /\.css$/,
@@ -156,14 +161,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i
+    }),
     new VueLoaderPlugin(),
     // 使用vue3 时推荐开启 具体可查看 https://link.vuejs.org/feature-flags.
     new webpack.DefinePlugin({
       '__VUE_OPTIONS_API__': true, //（启用/禁用选项 API 支持，默认值true：）
       '__VUE_PROD_DEVTOOLS__': false //（在生产中启用/禁用 devtools 支持，默认值false：）
-    }),
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i
     }),
     /* new BundleAnalyzerPlugin({
       analyzerPort: 9091,

@@ -1,3 +1,8 @@
+## 遇到的错误说明记录
+1. `imagemin-webpack-plugin` 错误
+该 plugin 的npm 依赖 一直下不全好像，采用cnpm安装\
+每次安装了其他的 npm 包，最好再执行一次 `cnpm i -D imagemin-webpack-plugin` 才能保证不会出错
+
 ## package.json 部分说明
 ```js
 "devDependencies":{
@@ -40,7 +45,7 @@
 
     // --START 压缩图片 一个 plugin 一个 loader
     "image-webpack-loader": "^8.1.0",
-    "imagemin-webpack-plugin": "^2.4.2",
+    "imagemin-webpack-plugin": "^2.4.2",  // 采用 cnpm 安装，每次 npm 包后，再一次采用 cnpm 安装一次，imagemin-webpack-plugin npm 依赖下不全
 
     // --START 集成Typescript
     "ts-loader": "^9.3.0",
